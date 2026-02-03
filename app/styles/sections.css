@@ -1,0 +1,384 @@
+/* =====================================================
+   BASE SECTION
+   ===================================================== */
+.section {
+  max-width: var(--container);
+  margin: 0 5rem;
+  padding: 3.5rem 1rem;
+}
+
+/* =====================================================
+   HERO
+   ===================================================== */
+/* Hero centered layout + background-ready */
+.hero{
+  max-width: 100%;
+  margin: 0;
+  padding: 10rem 0;
+  border-radius: 0 !important;
+  color: #fff;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-centered {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+
+  /* Aquí vas a poner el background que querés */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Content container */
+.hero-content {
+  max-width: 720px;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.btn-secondary{
+  font-size: 2rem;
+}
+
+/* Center actions */
+.hero-actions-centered {
+  justify-content: center;
+}
+
+/* Center social links */
+.social-links-centered {
+  justify-content: center;
+}
+
+/* If you use <img> instead of next/image in ig grid */
+.ig-img-static {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-centered {
+  background-image: url("/images/banner/home-banner.png");
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Optional: Add overlay for better text readability */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
+
+/* =====================================================
+   SECTION HEADERS
+   ===================================================== */
+.section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.section-head.center {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* =====================================================
+   CAROUSEL (EMBLA)
+   ===================================================== */
+.carousel-root {
+  width: 100%;
+  overflow: visible;
+}
+
+.carousel-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.carousel-controls {
+  display: flex;
+  margin-top: 1rem;
+  gap: 0.5rem;
+}
+
+/* =====================================================
+   EMBLA (DOC STYLE) - CLEAN
+   ===================================================== */
+.embla {
+  --slide-spacing: 16px;
+  --slide-size: 85%;
+}
+
+@media (min-width: 768px) {
+  .embla {
+    --slide-size: 32%;
+  }
+}
+
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  max-width: 100%;
+  gap: var(--slide-spacing);
+  touch-action: pan-y pinch-zoom;
+}
+
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+}
+
+/* Controls row */
+.embla__controls {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 16px;
+}
+
+.embla__buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 44px);
+  gap: 10px;
+  align-items: center;
+}
+
+.embla__button {
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+}
+
+.embla__button:hover {
+  background: #fafafa;
+}
+
+.embla__button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.embla__button__svg {
+  width: 18px;
+  height: 18px;
+}
+
+
+/* Category cards */
+.category-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  height: 520px;
+}
+
+.category-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.category-img {
+  object-fit: cover;
+}
+
+.category-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 18px;
+  color: #fff;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+.category-eyebrow {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.category-title {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-top: 6px;
+}
+
+.category-cta {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  opacity: 0.95;
+}
+
+/* =====================================================
+   FOLLOW US (INSTAGRAM GRID)
+   ===================================================== */
+.ig-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 768px) {
+  .ig-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ig-tile {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: #f2f2f2;
+}
+.ig-tile:hover {
+  transform: scale(1.02);
+  opacity: 0.8;
+}
+.ig-img {
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+
+
+/* =====================================================
+   PROCESS
+   ===================================================== */
+.steps {
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 900px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.step-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  background: #fff;
+}
+
+.step-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  background: #000;
+  color: #fff;
+}
+
+.step-title {
+  margin-top: 12px;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.step-text {
+  margin-top: 8px;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.center-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* =====================================================
+   TESTIMONIALS
+   ===================================================== */
+.testimonials {
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 900px) {
+  .testimonials {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.testimonial-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  background: #fff;
+}
+
+.stars {
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
+.testimonial-text {
+  margin-top: 10px;
+  color: #222;
+  line-height: 1.6;
+}
+
+.testimonial-name {
+  margin-top: 12px;
+  font-weight: 800;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
