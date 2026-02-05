@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Instagram, Facebook, MessageCircle } from "lucide-react";
+import { SocialIcon } from "react-social-icons";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="footer-inner">
         {/* Brand */}
         <div className="footer-brand">
-          <div className="footer-logo">GrooviesStore</div>
+          <div className="footer-logo">Groovies Bordados</div>
           <p className="footer-tagline">
             Bordados exclusivos hechos <br />
             en Costa Rica.
@@ -26,35 +26,29 @@ export default function Footer() {
 
         {/* Social */}
         <div className="footer-social">
-          <a
-            href="https://wa.me/50600000000"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="WhatsApp"
-          >
-            <MessageCircle size={20} />
-          </a>
-          <a
-            href="https://instagram.com/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Instagram"
-          >
-            <Instagram size={20} />
-          </a>
-          <a
-            href="https://facebook.com/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Facebook"
-          >
-            <Facebook size={20} />
-          </a>
+          <SocialIcon
+            url="https://wa.me/50600000000"
+            bgColor="var(--color-dark-1)"
+            fgColor="var(--color-whatsapp)"
+            style={{ height: 40, width: 40 }}
+          />
+          <SocialIcon
+            url="https://instagram.com/"
+            bgColor="var(--color-dark-1)"
+            fgColor="var(--color-instagram)"
+            style={{ height: 40, width: 40 }}
+          />
+          <SocialIcon
+            url="https://facebook.com/"
+            bgColor="var(--color-dark-1)"
+            fgColor="var(--color-facebook)"
+            style={{ height: 40, width: 40 }}
+          />
         </div>
       </div>
 
       <div className="footer-bottom">
-        © {year} GrooviesStore. All rights reserved.
+        © {year} Groovies. All rights reserved.
       </div>
     </footer>
   );

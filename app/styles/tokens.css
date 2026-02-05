@@ -1,8 +1,22 @@
 :root {
-  --color-bg: #ffffff;
-  --color-text: #111111;
-  --color-muted: #666666;
-  --color-border: #e5e5e5;
+  --color-bg: #0D0103;
+  --color-text: #F2F2F2;
+  --color-muted: #B0B0B0;
+  --color-border: #2a2a2a;
+  
+  /* Neutral shades */
+  --color-dark-1: #1a1a1a;
+  --color-dark-2: #2a2a2a;
+  --color-light: #fff;
+  
+  /* Accent colors */
+  --color-success: #25D366;
+  --color-white: #fff;
+  
+  /* Social media colors */
+  --color-whatsapp: #25D366;
+  --color-instagram: #E1306C;
+  --color-facebook: #1877F2;
 
   --radius-sm: 10px;
   --radius-md: 14px;

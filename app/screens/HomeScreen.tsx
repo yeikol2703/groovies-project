@@ -1,41 +1,49 @@
 import Link from "next/link";
-import { Instagram, Facebook, MessageCircle } from "lucide-react";
+import { SocialIcon } from "react-social-icons";
 import CategoryCarousel, { CategoryItem } from "@/components/ui/CategoryCarousel";
 
 const categories: CategoryItem[] = [
   {
     title: "CAMISAS",
-    subtitle: "Shop",
+    subtitle: "Categoria",
     href: "/catalog?cat=shirts",
-    image: "/images/categories/categoria.png",
+    image: "/images/categories/manekin1.png",
+    image2: "/images/categories/camisa.png",
   },
   {
     title: "SUETERES",
-    subtitle: "Shop",
+    subtitle: "Categoria",
     href: "/catalog?cat=patches",
-    image: "/images/categories/categoria.png",
+    image: "/images/categories/manekin2.png",
+        image2: "/images/categories/sueter2.png",
+
   },
   {
     title: "PARCHES",
-    subtitle: "Shop",
+    subtitle: "Categoria",
     href: "/catalog?cat=outerwear",
-    image: "/images/categories/categoria.png",
+    image2: "/images/categories/parche.png",
+        image: "/images/categories/parches.png",
+
   },
-  {
-    title: "PERSONALIZADOS",
-    subtitle: "Shop",
+   {
+    title: "PROXIMAMENTE",
+    subtitle: "Categoria",
     href: "/catalog?cat=outerwear",
-    image: "/images/categories/categoria.png",
-  },
+    image: "/images/categories/next.png",
+        image2: "/images/categories/next2.png",
+
+  }, 
 ];
 
 const igGrid = [
-  "/images/categories/categoria.png",
-  "/images/categories/categoria.png",
-  "/images/categories/categoria.png",
-  "/images/categories/categoria.png",
-  "/images/categories/categoria.png",
-  "/images/categories/categoria.png",
+    "/images/categories/gamabunta.gif",
+  "/images/categories/ig2.png",
+    "/images/categories/ig5.png",
+    "/images/categories/ig3.png",
+        "/images/categories/cloth.gif",
+  "/images/categories/ig4.png",
+
 ];
 
 export default function HomeScreen() {
@@ -61,22 +69,26 @@ export default function HomeScreen() {
             en Costa Rica.
           </p>
 
-          <div className="hero-actions hero-actions-centered">
-            <Link className="btn-secondary hover-underline" href="/catalog">
-              Personalizar
-            </Link>
-          </div>
-
-          <div className="social-links social-links-centered">
-            <a href={igLink} target="_blank" rel="noreferrer" aria-label="Instagram">
-              <Instagram size={18} />
-            </a>
-            <a href={fbLink} target="_blank" rel="noreferrer" aria-label="Facebook">
-              <Facebook size={18} />
-            </a>
-            <a href={waLink} target="_blank" rel="noreferrer" aria-label="WhatsApp">
-              <MessageCircle size={18} />
-            </a>
+   
+          <div className="social-links social-links-centered hero-social-links">
+            <SocialIcon
+              url={igLink}
+              bgColor="var(--color-dark-1)"
+              fgColor="var(--color-instagram)"
+              style={{ height: 60, width: 60 }}
+            />
+            <SocialIcon
+              url={fbLink}
+              bgColor="var(--color-dark-1)"
+              fgColor="var(--color-facebook)"
+              style={{ height: 60, width: 60 }}
+            />
+            <SocialIcon
+              url={waLink}
+              bgColor="var(--color-dark-1)"
+              fgColor="var(--color-whatsapp)"
+              style={{ height: 60, width: 60 }}
+            />
           </div>
         </div>
       </section>
@@ -95,15 +107,24 @@ export default function HomeScreen() {
           </p>
 
            <div className="social-links social-links-centered">
-            <a href={igLink} target="_blank" rel="noreferrer" aria-label="Instagram">
-              <Instagram size={18} />
-            </a>
-            <a href={fbLink} target="_blank" rel="noreferrer" aria-label="Facebook">
-              <Facebook size={18} />
-            </a>
-            <a href={waLink} target="_blank" rel="noreferrer" aria-label="WhatsApp">
-              <MessageCircle size={18} />
-            </a>
+            <SocialIcon
+              url={igLink}
+              bgColor="var(--color-dark-1)"
+              fgColor="var(--color-instagram)"
+              style={{ height: 40, width: 40 }}
+            />
+            <SocialIcon
+              url={fbLink}
+              bgColor="var(--color-dark-1)"
+              fgColor="var(--color-facebook)"
+              style={{ height: 40, width: 40 }}
+            />
+            <SocialIcon
+              url={waLink}
+              bgColor="var(--color-dark-1)"
+              fgColor="var(--color-whatsapp)"
+              style={{ height: 40, width: 40 }}
+            />
           </div>
         </div>
 
@@ -120,6 +141,18 @@ export default function HomeScreen() {
               {/* si usás next/image aquí, mantenelo, pero no es obligatorio */}
               {/* <Image src={src} alt="Instagram preview" fill className="ig-img" /> */}
               <img src={src} alt="Instagram preview" className="ig-img-static" />
+              <div className="overlay-icons" aria-hidden="true">
+                <span className="icon icon-like" title="Like">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M12 21s-7.5-4.9-9.2-8.1C1.6 9.9 4 6 7.5 6c1.7 0 3 .8 4 2 1-1.2 2.3-2 4-2C20 6 22.4 9.9 21.2 12.9 19.5 16.1 12 21 12 21z"/>
+                  </svg>
+                </span>
+                <span className="icon icon-comment" title="Comment">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M21 6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v11l4-2h12a2 2 0 0 0 2-2V6z"/>
+                  </svg>
+                </span>
+              </div>
             </a>
           ))}
         </div>
@@ -163,9 +196,13 @@ export default function HomeScreen() {
 
 
         <div className="center-actions">
-          <a className="nav-cta" href={waLink} target="_blank" rel="noreferrer">
-            COTIZAR
-          </a>
+             <SocialIcon
+                  url={waLink}
+                  bgColor="var(--color-success)"
+                  fgColor="var(--color-light)"
+                  style={{ height: 60, width: 60 }}
+                  target="_blank"
+                />
         </div>
       </section>
 
@@ -178,18 +215,21 @@ export default function HomeScreen() {
   <div className="testimonials">
     {[
       {
+        stars: "★★★★★",
         name: "YEIKOL VILLALOBOS",
         location: "HEREDIA, CR",
         text:
           "Los detalles son súper precisos. Se entrego en el tiempo acordado y la calidad es excelente.",
       },
       {
+        stars: "★★★★★",
         name: "KARLA V. RODRÍGUEZ",
         location: "SAN JOSÉ, CR",
         text:
           "Hicimos los uniformes de la oficina y quedaron excelentes. Muy buena atención y rapidez.",
       },
       {
+        stars: "★★★★★",
         name: "ANDRÉS RAMIREZ",
         location: "CARTAGO, CR",
         text:
@@ -197,7 +237,7 @@ export default function HomeScreen() {
       },
     ].map((t) => (
       <div key={t.name} className="testimonial-card">
-        <div className="stars">★★★★★</div>
+        <div className="stars">{t.stars}</div>
 
         {/* COMMENT → sentence case */}
         <p className="testimonial-text">“{t.text}”</p>
@@ -207,7 +247,11 @@ export default function HomeScreen() {
         <div className="testimonial-location">{t.location}</div>
       </div>
     ))}
+ 
   </div>
+    <div className="testimonial-more"> <Link href="/testimonials" >
+      Ver más
+    </Link></div>
 </section>
 
     </main>

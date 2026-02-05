@@ -16,7 +16,7 @@
   margin: 0;
   padding: 10rem 0;
   border-radius: 0 !important;
-  color: #fff;
+  color: var(--color-light);
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -43,10 +43,36 @@
   position: relative;
   z-index: 1;
   text-align: center;
+  margin-bottom: 25rem;
 }
 
 .btn-secondary{
   font-size: 2rem;
+  background: linear-gradient(to right, #ff0000, #ffc400);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+    animation: pulse 1.5s infinite;
+
+}
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+}
+.btn-secondary:hover{
+  color: white;
 }
 
 /* Center actions */
@@ -57,6 +83,24 @@
 /* Center social links */
 .social-links-centered {
   justify-content: center;
+}
+
+/* Hero social: gradient as circular ring on hover (same colors as header) */
+.hero-social-links a {
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.3s ease,
+    background 0.3s ease, border 0.3s ease, background-clip 0.3s ease;
+  border: 2px solid var(--color-border);
+  background: var(--color-dark-1);
+}
+.hero-social-links a:hover {
+  border: 2px solid transparent;
+  background: linear-gradient(var(--color-dark-1), var(--color-dark-1)) padding-box,
+    linear-gradient(to right, #ff0000, #ffc400) border-box;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(255, 196, 0, 0.35);
 }
 
 /* If you use <img> instead of next/image in ig grid */
@@ -191,7 +235,7 @@
 }
 
 .embla__button:hover {
-  background: #fafafa;
+  background: var(--color-dark-2);
 }
 
 .embla__button:disabled {
@@ -210,7 +254,7 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--color-border);
-  background: #fff;
+  background: var(--color-dark-1);
   height: 520px;
 }
 
@@ -222,6 +266,25 @@
 
 .category-img {
   object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.category-img.active {
+  opacity: 1;
+}
+
+.category-img:not(.active) {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.category-card:hover .category-img.active {
+  opacity: 0;
+}
+
+.category-card:hover .category-img:not(.active) {
+  opacity: 1;
 }
 
 .category-overlay {
@@ -231,7 +294,7 @@
   flex-direction: column;
   justify-content: end;
   padding: 18px;
-  color: #fff;
+  color: var(--color-light);
   background: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0) 55%,
@@ -275,22 +338,60 @@
   }
 }
 
+/* IG grid: show small icons over image on hover */
 .ig-tile {
   position: relative;
   overflow: hidden;
+  display: block;
+}
+
+.ig-img-static {
+  display: block;
   aspect-ratio: 1 / 1;
-  background: #f2f2f2;
-}
-.ig-tile:hover {
-  transform: scale(1.02);
-  opacity: 0.8;
-}
-.ig-img {
   object-fit: cover;
-  transition: transform 0.25s ease;
+  transition: opacity .18s ease, transform .25s ease;
 }
 
+/* Si ya tenés una regla que aplica opacidad al hover, esta la complementa */
+.ig-tile:hover .ig-img-static {
+  opacity: 0.6;
+  transform: scale(1.02);
+}
 
+.overlay-icons {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+
+.ig-tile:hover .overlay-icons {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.overlay-icons .icon {
+  width: 34px;
+  height: 34px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.overlay-icons .icon svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
 
 /* =====================================================
    PROCESS
@@ -311,7 +412,8 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 18px;
-  background: #fff;
+  background: var(--color-dark-1);
+  justify-items: center;
 }
 
 .step-badge {
@@ -321,8 +423,8 @@
   display: grid;
   place-items: center;
   font-weight: 800;
-  background: #000;
-  color: #fff;
+  background: #ffbb00;
+  color: var(--color-light);
 }
 
 .step-title {
@@ -358,11 +460,35 @@
   }
 }
 
+/* Testimonials: stars yellow, name & location aligned to the right */
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.testimonial-card .stars {
+  color: #FFD600;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Ensure name and location stay at the end/right */
+.testimonial-name,
+.testimonial-location {
+  align-self: flex-end;
+  text-align: right;
+}
+.testimonial-more{
+   align-self: flex-end;
+  text-align: right;
+  margin-top: 1rem;
+}
 .testimonial-card {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 18px;
-  background: #fff;
+  background: var(--color-dark-1);
 }
 
 .stars {
@@ -372,7 +498,7 @@
 
 .testimonial-text {
   margin-top: 10px;
-  color: #222;
+  color: var(--color-text);
   line-height: 1.6;
 }
 

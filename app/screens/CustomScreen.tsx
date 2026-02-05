@@ -153,13 +153,14 @@ export default function CustomScreen() {
             </div>
 
             <div className="quote-actions">
+               <a className="btn-secondary hover-underline" href={mailtoLink}>
+                ENVIAR
+              </a>
               <a className="nav-cta" href={waLink} target="_blank" rel="noreferrer">
                 ENVIAR POR WHATSAPP
               </a>
 
-              <a className="btn-secondary" href={mailtoLink}>
-                ENVIAR POR EMAIL
-              </a>
+             
             </div>
 
             <p className="quote-hint">

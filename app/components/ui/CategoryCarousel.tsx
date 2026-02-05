@@ -10,7 +10,8 @@ export type CategoryItem = {
   title: string;
   subtitle: string;
   href: string;
-  image: string; // from /public
+  image: string; 
+  image2: string;
 };
 
 export default function CategoryCarousel({ items }: { items: CategoryItem[] }) {
@@ -36,7 +37,9 @@ export default function CategoryCarousel({ items }: { items: CategoryItem[] }) {
             <Link key={c.title} href={c.href} className="embla__slide">
               <div className="category-card">
                 <div className="category-media">
-                  <Image src={c.image} alt={c.title} fill className="category-img" />
+                  <Image src={c.image} alt={c.title} fill className="category-img active" />
+                  <Image src={c.image2} alt={c.title} fill className="category-img" />
+
                   <div className="category-overlay">
                     <div className="category-eyebrow">{c.subtitle}</div>
                     <div className="category-title">{c.title}</div>
