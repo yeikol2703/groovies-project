@@ -7,9 +7,10 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <Header />
-        {children}
-        <Footer />
-
+        <div className="site-content">
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );

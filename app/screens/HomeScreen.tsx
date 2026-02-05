@@ -1,55 +1,59 @@
 import Link from "next/link";
 import { SocialIcon } from "react-social-icons";
 import CategoryCarousel, { CategoryItem } from "@/components/ui/CategoryCarousel";
+import { waLink, igLink, fbLink } from "@/lib/env";
+import { PROCESS, TESTIMONIALS } from "@/lib/constants";
 
-const categories: CategoryItem[] = [
+/** Home carousel categories (images + catalog links). */
+const HOME_CATEGORIES: CategoryItem[] = [
   {
     title: "CAMISAS",
     subtitle: "Categoria",
-    href: "/catalog?cat=shirts",
+    href: "/catalog?cat=shirt",
     image: "/images/categories/manekin1.png",
     image2: "/images/categories/camisa.png",
   },
   {
     title: "SUETERES",
     subtitle: "Categoria",
-    href: "/catalog?cat=patches",
+    href: "/catalog?cat=hoodie",
     image: "/images/categories/manekin2.png",
-        image2: "/images/categories/sueter2.png",
-
+    image2: "/images/categories/sueter2.png",
   },
   {
     title: "PARCHES",
     subtitle: "Categoria",
-    href: "/catalog?cat=outerwear",
+    href: "/catalog?cat=patch",
+    image: "/images/categories/parches.png",
     image2: "/images/categories/parche.png",
-        image: "/images/categories/parches.png",
-
   },
-   {
+  {
     title: "PROXIMAMENTE",
     subtitle: "Categoria",
-    href: "/catalog?cat=outerwear",
+    href: "/catalog?cat=other",
     image: "/images/categories/next.png",
-        image2: "/images/categories/next2.png",
-
-  }, 
+    image2: "/images/categories/next2.png",
+  },
 ];
 
-const igGrid = [
-    "/images/categories/gamabunta.gif",
+/** Instagram grid image paths (follow-us section). */
+const IG_GRID_IMAGES = [
+  "/images/categories/gamabunta.gif",
   "/images/categories/ig2.png",
-    "/images/categories/ig5.png",
-    "/images/categories/ig3.png",
-        "/images/categories/cloth.gif",
+  "/images/categories/ig5.png",
+  "/images/categories/ig3.png",
+  "/images/categories/cloth.gif",
   "/images/categories/ig4.png",
-
 ];
 
+const HERO_SOCIAL_SIZE = 60;
+const FOLLOW_SOCIAL_SIZE = 40;
+
+/**
+ * Home page: hero, category carousel, follow-us (IG grid), process steps, testimonials.
+ * Social links and process/testimonials content come from env and shared constants.
+ */
 export default function HomeScreen() {
-  const waLink = process.env.NEXT_PUBLIC_WA_LINK ?? "https://wa.me/50600000000";
-  const igLink = process.env.NEXT_PUBLIC_IG_LINK ?? "#";
-  const fbLink = process.env.NEXT_PUBLIC_FB_LINK ?? "#";
 
   return (
     <main>
@@ -75,19 +79,19 @@ export default function HomeScreen() {
               url={igLink}
               bgColor="var(--color-dark-1)"
               fgColor="var(--color-instagram)"
-              style={{ height: 60, width: 60 }}
+              style={{ height: HERO_SOCIAL_SIZE, width: HERO_SOCIAL_SIZE }}
             />
             <SocialIcon
               url={fbLink}
               bgColor="var(--color-dark-1)"
               fgColor="var(--color-facebook)"
-              style={{ height: 60, width: 60 }}
+              style={{ height: HERO_SOCIAL_SIZE, width: HERO_SOCIAL_SIZE }}
             />
             <SocialIcon
               url={waLink}
               bgColor="var(--color-dark-1)"
               fgColor="var(--color-whatsapp)"
-              style={{ height: 60, width: 60 }}
+              style={{ height: HERO_SOCIAL_SIZE, width: HERO_SOCIAL_SIZE }}
             />
           </div>
         </div>
@@ -95,7 +99,7 @@ export default function HomeScreen() {
 
       {/* SHOP BY CATEGORY */}
       <section className="section" id="shop-by-category">
-        <CategoryCarousel items={categories} />
+        <CategoryCarousel items={HOME_CATEGORIES} />
       </section>
 
       {/* FOLLOW US */}
@@ -106,30 +110,30 @@ export default function HomeScreen() {
             Nuevos lanzamientos, trabajos personalizados y contenido exclusivo en nuestras redes.
           </p>
 
-           <div className="social-links social-links-centered">
+          <div className="social-links social-links-centered">
             <SocialIcon
               url={igLink}
               bgColor="var(--color-dark-1)"
               fgColor="var(--color-instagram)"
-              style={{ height: 40, width: 40 }}
+              style={{ height: FOLLOW_SOCIAL_SIZE, width: FOLLOW_SOCIAL_SIZE }}
             />
             <SocialIcon
               url={fbLink}
               bgColor="var(--color-dark-1)"
               fgColor="var(--color-facebook)"
-              style={{ height: 40, width: 40 }}
+              style={{ height: FOLLOW_SOCIAL_SIZE, width: FOLLOW_SOCIAL_SIZE }}
             />
             <SocialIcon
               url={waLink}
               bgColor="var(--color-dark-1)"
               fgColor="var(--color-whatsapp)"
-              style={{ height: 40, width: 40 }}
+              style={{ height: FOLLOW_SOCIAL_SIZE, width: FOLLOW_SOCIAL_SIZE }}
             />
           </div>
         </div>
 
         <div className="ig-grid">
-          {igGrid.map((src, idx) => (
+          {IG_GRID_IMAGES.map((src, idx) => (
             <a
               key={`${src}-${idx}`}
               className="ig-tile"
@@ -159,100 +163,53 @@ export default function HomeScreen() {
       </section>
 
       {/* OUR PROCESS */}
-    <section className="section" id="process">
-  <div className="section-head center">
-    <h2 className="page-title">NUESTRO PROCESO</h2>
-    <p className="page-subtitle">
-      Convertimos tus ideas en realidad en solo tres pasos. Calidad garantizada en cada puntada.
-    </p>
-  </div>
-
-  <div className="steps">
-    <div className="step-card">
-      <div className="step-badge">1</div>
-      <h3 className="step-title">ENVÍA TU DISEÑO</h3>
-      <p className="step-text">
-        Sube tu logo o idea en cualquier formato digital para que nuestro equipo lo evalúe.
-      </p>
-    </div>
-
-    <div className="step-card">
-      <div className="step-badge">2</div>
-      <h3 className="step-title">DIGITALIZACIÓN</h3>
-      <p className="step-text">
-        Convertimos tu imagen en un diseño de bordado optimizado y te enviamos una muestra digital.
-      </p>
-    </div>
-
-    <div className="step-card">
-      <div className="step-badge">3</div>
-      <h3 className="step-title">BORDADO Y ENTREGA</h3>
-      <p className="step-text">
-        Una vez aprobado, procedemos con el bordado final y te lo entregamos en todo el país.
-      </p>
-    </div>
-  </div>
-
-
-
+      <section className="section" id="process">
+        <div className="section-head center">
+          <h2 className="page-title">{PROCESS.title}</h2>
+          <p className="page-subtitle">{PROCESS.subtitle}</p>
+        </div>
+        <div className="steps">
+          {PROCESS.steps.map((step) => (
+            <div key={step.number} className="step-card">
+              <div className="step-badge">{step.number}</div>
+              <h3 className="step-title">{step.title}</h3>
+              <p className="step-text">{step.description}</p>
+            </div>
+          ))}
+        </div>
         <div className="center-actions">
-             <SocialIcon
-                  url={waLink}
-                  bgColor="var(--color-success)"
-                  fgColor="var(--color-light)"
-                  style={{ height: 60, width: 60 }}
-                  target="_blank"
-                />
+          <SocialIcon
+            url={waLink}
+            bgColor="var(--color-success)"
+            fgColor="var(--color-light)"
+            style={{ height: HERO_SOCIAL_SIZE, width: HERO_SOCIAL_SIZE }}
+            target="_blank"
+          />
         </div>
       </section>
 
       {/* TESTIMONIALS */}
-  <section className="section" id="testimonials">
-  <div className="section-head center">
-    <h2 className="page-title">LO QUE DICEN NUESTROS CLIENTES</h2>
-  </div>
-
-  <div className="testimonials">
-    {[
-      {
-        stars: "★★★★★",
-        name: "YEIKOL VILLALOBOS",
-        location: "HEREDIA, CR",
-        text:
-          "Los detalles son súper precisos. Se entrego en el tiempo acordado y la calidad es excelente.",
-      },
-      {
-        stars: "★★★★★",
-        name: "KARLA V. RODRÍGUEZ",
-        location: "SAN JOSÉ, CR",
-        text:
-          "Hicimos los uniformes de la oficina y quedaron excelentes. Muy buena atención y rapidez.",
-      },
-      {
-        stars: "★★★★★",
-        name: "ANDRÉS RAMIREZ",
-        location: "CARTAGO, CR",
-        text:
-          "El regalo perfecto. El bordado en la sudadera se ve de calidad. Súper recomendado.",
-      },
-    ].map((t) => (
-      <div key={t.name} className="testimonial-card">
-        <div className="stars">{t.stars}</div>
-
-        {/* COMMENT → sentence case */}
+      <section className="section" id="testimonials">
+        <div className="section-head center">
+          <h2 className="page-title">LO QUE DICEN NUESTROS CLIENTES</h2>
+        </div>
+        <div className="testimonials">
+          {TESTIMONIALS.map((t) => (
+            <div key={`${t.name}-${t.location}`} className="testimonial-card">
+              <div className="stars">★★★★★</div>
         <p className="testimonial-text">“{t.text}”</p>
 
         {/* NAME + LOCATION → uppercase */}
-        <div className="testimonial-name">{t.name}</div>
-        <div className="testimonial-location">{t.location}</div>
-      </div>
-    ))}
+              <div className="testimonial-name">{t.name}</div>
+              <div className="testimonial-location">{t.location}</div>
+            </div>
+          ))}
  
-  </div>
-    <div className="testimonial-more"> <Link href="/testimonials" >
-      Ver más
-    </Link></div>
-</section>
+        </div>
+        <div className="testimonial-more">
+          <Link href="/testimonials">Ver más</Link>
+        </div>
+      </section>
 
     </main>
   );

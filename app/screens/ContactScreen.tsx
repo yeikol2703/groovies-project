@@ -1,12 +1,12 @@
 import { Mail, Phone, MapPin } from "lucide-react";
+import { email, phone, address } from "@/lib/env";
+import { OPENING_HOURS } from "@/lib/constants";
 
+/**
+ * Contact page: opening hours, email, phone, address.
+ * All contact data comes from env (NEXT_PUBLIC_EMAIL, NEXT_PUBLIC_PHONE, etc.).
+ */
 export default function ContactScreen() {
-  const email = process.env.NEXT_PUBLIC_EMAIL_TO ?? "grooviesstore@email.com";
-  const phone = process.env.NEXT_PUBLIC_PHONE ?? "+506 0000 0000";
-  const waLink = process.env.NEXT_PUBLIC_WA_LINK ?? "https://wa.me/50600000000";
-  const address =
-    process.env.NEXT_PUBLIC_ADDRESS ?? "San José, Costa Rica";
-
   return (
     <main className="section">
       <div className="section-head center">
@@ -17,20 +17,10 @@ export default function ContactScreen() {
       </div>
 
       <div className="contact-grid">
-        {/* LEFT: Opening hours */}
         <section className="contact-card">
           <h2 className="contact-card-title">HORARIO</h2>
-
           <div className="hours">
-            {[
-              { day: "Lunes", time: "9:00 AM - 6:00 PM" },
-              { day: "Martes", time: "9:00 AM - 6:00 PM" },
-              { day: "Miércoles", time: "9:00 AM - 6:00 PM" },
-              { day: "Jueves", time: "9:00 AM - 6:00 PM" },
-              { day: "Viernes", time: "9:00 AM - 6:00 PM" },
-              { day: "Sábado", time: "10:00 AM - 2:00 PM" },
-              { day: "Domingo", time: "Cerrado" },
-            ].map((row) => (
+            {OPENING_HOURS.map((row) => (
               <div className="hours-row" key={row.day}>
                 <div className="hours-day">{row.day}</div>
                 <div className="hours-line" />
@@ -42,11 +32,9 @@ export default function ContactScreen() {
           <p className="contact-note">
             Para cotizaciones rápidas, WhatsApp es el canal más directo.
           </p>
-
-
         </section>
 
-        {/* RIGHT: Contact cards */}
+        {/* Contact cards */}
         <section className="contact-side">
           <div className="info-card">
             <div className="info-icon">

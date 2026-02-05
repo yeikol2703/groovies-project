@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { buildWaLink, email } from "@/lib/env";
+import { PROCESS } from "@/lib/constants";
 
 type FormState = {
   name: string;
@@ -10,10 +12,11 @@ type FormState = {
   message: string;
 };
 
+/**
+ * Custom / quote page: process steps (shared content) + quote form.
+ * WhatsApp and mailto links use env (NEXT_PUBLIC_WA_LINK, NEXT_PUBLIC_EMAIL).
+ */
 export default function CustomScreen() {
-  const waNumber = process.env.NEXT_PUBLIC_WA_NUMBER ?? "50600000000"; // <-- put CR number
-  const emailTo = process.env.NEXT_PUBLIC_EMAIL_TO ?? "grooviesstore@email.com"; // <-- your email
-
   const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
@@ -36,16 +39,13 @@ export default function CustomScreen() {
     return lines.join("\n");
   }, [form]);
 
-  const waLink = useMemo(() => {
-    const text = encodeURIComponent(baseText);
-    return `https://wa.me/${waNumber}?text=${text}`;
-  }, [waNumber, baseText]);
+  const waLink = useMemo(() => buildWaLink(baseText), [baseText]);
 
   const mailtoLink = useMemo(() => {
     const subject = encodeURIComponent("Cotización - Bordado Personalizado");
     const body = encodeURIComponent(baseText);
-    return `mailto:${emailTo}?subject=${subject}&body=${body}`;
-  }, [emailTo, baseText]);
+    return `mailto:${email}?subject=${subject}&body=${body}`;
+  }, [baseText]);
 
   const update = (key: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [key]: e.target.value }));
@@ -55,39 +55,20 @@ export default function CustomScreen() {
     <main className="section">
       <section id="process">
         <div className="section-head center">
-          <h2 className="page-title">NUESTRO PROCESO</h2>
-          <p className="page-subtitle">
-            Convertimos tus ideas en realidad en solo tres pasos. Calidad garantizada en cada puntada.
-          </p>
+          <h2 className="page-title">{PROCESS.title}</h2>
+          <p className="page-subtitle">{PROCESS.subtitle}</p>
         </div>
-
         <div className="steps">
-          <div className="step-card">
-            <div className="step-badge">1</div>
-            <h3 className="step-title">ENVÍA TU DISEÑO</h3>
-            <p className="step-text">
-              Sube tu logo o idea en cualquier formato digital para que nuestro equipo lo evalúe.
-            </p>
-          </div>
-
-          <div className="step-card">
-            <div className="step-badge">2</div>
-            <h3 className="step-title">DIGITALIZACIÓN</h3>
-            <p className="step-text">
-              Convertimos tu imagen en un diseño de bordado optimizado y te enviamos una muestra digital.
-            </p>
-          </div>
-
-          <div className="step-card">
-            <div className="step-badge">3</div>
-            <h3 className="step-title">BORDADO Y ENTREGA</h3>
-            <p className="step-text">
-              Una vez aprobado, procedemos con el bordado final y te lo entregamos en todo el país.
-            </p>
-          </div>
+          {PROCESS.steps.map((step) => (
+            <div key={step.number} className="step-card">
+              <div className="step-badge">{step.number}</div>
+              <h3 className="step-title">{step.title}</h3>
+              <p className="step-text">{step.description}</p>
+            </div>
+          ))}
         </div>
 
-        {/* REQUEST FORM */}
+        {/* Quote form */}
         <div className="quote-card">
           <h3 className="quote-title">SOLICITAR COTIZACIÓN</h3>
           <p className="quote-subtitle">
@@ -153,14 +134,12 @@ export default function CustomScreen() {
             </div>
 
             <div className="quote-actions">
-               <a className="btn-secondary hover-underline" href={mailtoLink}>
+              <a className="btn-secondary hover-underline" href={mailtoLink}>
                 ENVIAR
               </a>
               <a className="nav-cta" href={waLink} target="_blank" rel="noreferrer">
                 ENVIAR POR WHATSAPP
               </a>
-
-             
             </div>
 
             <p className="quote-hint">

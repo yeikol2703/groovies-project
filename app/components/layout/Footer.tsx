@@ -1,13 +1,19 @@
 import Link from "next/link";
 import { SocialIcon } from "react-social-icons";
+import { waLink, igLink, fbLink } from "@/lib/env";
 
+const SOCIAL_ICON_SIZE = 40;
+
+/**
+ * Site footer: brand, nav links, social icons (WhatsApp, Instagram, Facebook).
+ * All social URLs come from env (NEXT_PUBLIC_WA_LINK, etc.).
+ */
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="site-footer">
       <div className="footer-inner">
-        {/* Brand */}
         <div className="footer-brand">
           <div className="footer-logo">Groovies Bordados</div>
           <p className="footer-tagline">
@@ -16,7 +22,6 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Navigation */}
         <nav className="footer-nav">
           <Link href="/">Inicio</Link>
           <Link href="/catalog">Catalogo</Link>
@@ -24,25 +29,24 @@ export default function Footer() {
           <Link href="/contact">Contacto</Link>
         </nav>
 
-        {/* Social */}
         <div className="footer-social">
           <SocialIcon
-            url="https://wa.me/50600000000"
+            url={waLink}
             bgColor="var(--color-dark-1)"
             fgColor="var(--color-whatsapp)"
-            style={{ height: 40, width: 40 }}
+            style={{ height: SOCIAL_ICON_SIZE, width: SOCIAL_ICON_SIZE }}
           />
           <SocialIcon
-            url="https://instagram.com/"
+            url={igLink}
             bgColor="var(--color-dark-1)"
             fgColor="var(--color-instagram)"
-            style={{ height: 40, width: 40 }}
+            style={{ height: SOCIAL_ICON_SIZE, width: SOCIAL_ICON_SIZE }}
           />
           <SocialIcon
-            url="https://facebook.com/"
+            url={fbLink}
             bgColor="var(--color-dark-1)"
             fgColor="var(--color-facebook)"
-            style={{ height: 40, width: 40 }}
+            style={{ height: SOCIAL_ICON_SIZE, width: SOCIAL_ICON_SIZE }}
           />
         </div>
       </div>

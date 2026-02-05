@@ -17,6 +17,9 @@ enum categories {
   other = "PROXIMAMENTE",
 }
 
+/**
+ * Gallery page: fetches /api/gallery (Cloudinary), grid of images with category/price.
+ */
 export default function GaleryScreen() {
   const [items, setItems] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);

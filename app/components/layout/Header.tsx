@@ -2,32 +2,34 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { SocialIcon } from "react-social-icons";
+import { waLink } from "@/lib/env";
 
-const nav = [
+/** Main nav items (excluding catalog sub-items). */
+const NAV_ITEMS = [
   { href: "/catalog", label: "CATALOGO" },
   { href: "/galery", label: "GALERIA" },
   { href: "/custom", label: "PERSONALIZADO" },
   { href: "/testimonials", label: "TESTIMONIOS" },
   { href: "/faq", label: "PREGUNTAS" },
   { href: "/contact", label: "CONTACTO" },
-];
+] as const;
 
-const categories = [
+/** Catalog dropdown categories. */
+const CATEGORY_LINKS = [
   { href: "/catalog?cat=shirt", label: "CAMISAS" },
   { href: "/catalog?cat=hoodie", label: "SUETERS" },
   { href: "/catalog?cat=patch", label: "PARCHES" },
   { href: "/catalog?cat=other", label: "OTROS" },
-];
+] as const;
 
+/**
+ * Site header: logo, desktop nav + catalog dropdown, WhatsApp CTA, mobile drawer.
+ */
 export default function Header() {
   const pathname = usePathname();
-  const waLink = useMemo(
-    () => process.env.NEXT_PUBLIC_WA_LINK ?? "https://wa.me/50600000000",
-    []
-  );
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCatOpen, setIsCatOpen] = useState(false);
@@ -57,7 +59,7 @@ export default function Header() {
 
         {/* Desktop nav */}
         <div className="nav-links">
-          {nav.map((item) => {
+          {NAV_ITEMS.map((item) => {
             const isActive = pathname === item.href;
 
             if (item.href === "/catalog") {
@@ -69,10 +71,9 @@ export default function Header() {
                   >
                     {item.label}
                   </Link>
-
-                  <div className="dropdown " aria-label="Categorias">
-                    {categories.map((cat) => (
-                      <Link key={cat.href} href={cat.href} className="dropdown-item ">
+                  <div className="dropdown" aria-label="Categorias">
+                    {CATEGORY_LINKS.map((cat) => (
+                      <Link key={cat.href} href={cat.href} className="dropdown-item">
                         {cat.label}
                       </Link>
                     ))}
@@ -161,7 +162,7 @@ export default function Header() {
                     >
                       VER TODO
                     </Link>
-                    {categories.map((cat) => (
+                    {CATEGORY_LINKS.map((cat) => (
                       <Link
                         key={cat.href}
                         href={cat.href}
@@ -174,10 +175,8 @@ export default function Header() {
                 )}
               </div>
 
-              {/* Rest links (skip /catalog because handled above) */}
-              {nav
-                .filter((x) => x.href !== "/catalog")
-                .map((item) => (
+              {/* Rest of nav (catalog handled above) */}
+              {NAV_ITEMS.filter((x) => x.href !== "/catalog").map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}

@@ -31,6 +31,9 @@ const faqs: FAQItem[] = [
   },
 ];
 
+/**
+ * FAQ page: accordion list. Content is local; consider moving to constants if shared.
+ */
 export default function FAQScreen() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 

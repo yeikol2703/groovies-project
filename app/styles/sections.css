@@ -2,58 +2,98 @@
    BASE SECTION
    ===================================================== */
 .section {
+  width: 100%;
   max-width: var(--container);
-  margin: 0 5rem;
-  padding: 3.5rem 1rem;
+  margin: 0;
+  padding: var(--section-padding-y) var(--gutter);
+  box-sizing: border-box;
 }
 
 /* =====================================================
    HERO
    ===================================================== */
 /* Hero centered layout + background-ready */
-.hero{
+/* On small screens: shorter hero so the banner is more appreciable */
+.hero {
   max-width: 100%;
   margin: 0;
-  padding: 10rem 0;
+  padding: 2.5rem 0 3.5rem;
   border-radius: 0 !important;
   color: var(--color-light);
   position: relative;
-  min-height: 100vh;
+  min-height: 75vh;
+  min-height: 75dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
+
+@media (min-width: 640px) {
+  .hero {
+    padding: 6rem 0 10rem;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    padding: 10rem 0;
+  }
+}
+
 .hero-centered {
   display: grid;
   place-items: center;
   text-align: center;
   border-radius: var(--radius-lg);
   overflow: hidden;
-
-  /* Aquí vas a poner el background que querés */
-  background-size: cover;
-  background-position: center;
+  background-image: url("/images/banner/home-banner.png");
+  /* Banner scales with viewport width: smaller on small screens, larger on wide screens (aspect ratio preserved) */
+  background-size: 100vw auto;
+  background-position: center center;
   background-repeat: no-repeat;
+}
+
+@media (min-width: 900px) {
+  .hero-centered {
+    /* On larger screens use cover so the banner fills the hero and grows with it */
+    background-size: cover;
+  }
 }
 
 /* Content container */
 .hero-content {
   max-width: 720px;
+  width: 100%;
   position: relative;
   z-index: 1;
   text-align: center;
-  margin-bottom: 25rem;
+  padding: 0;
+  box-sizing: border-box;
+  margin-bottom: 13rem;
 }
 
-.btn-secondary{
+@media (min-width: 640px) {
+  .hero-content {
+    margin-bottom: 10rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero-content {
+    margin-bottom: 25rem;
+  }
+}
+
+.btn-secondary {
   font-size: 2rem;
-  background: linear-gradient(to right, #ff0000, #ffc400);
+  background: var(--gradient-accent);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-    animation: pulse 1.5s infinite;
-
+  animation: pulse 1.5s infinite;
 }
 @keyframes pulse {
     0% {
@@ -71,8 +111,8 @@
         box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
     }
 }
-.btn-secondary:hover{
-  color: white;
+.btn-secondary:hover {
+  color: var(--color-light);
 }
 
 /* Center actions */
@@ -96,23 +136,13 @@
 .hero-social-links a:hover {
   border: 2px solid transparent;
   background: linear-gradient(var(--color-dark-1), var(--color-dark-1)) padding-box,
-    linear-gradient(to right, #ff0000, #ffc400) border-box;
+    var(--gradient-accent) border-box;
   background-clip: padding-box, border-box;
   background-origin: padding-box, border-box;
   transform: translateY(-2px);
-  box-shadow: 0 0 12px rgba(255, 196, 0, 0.35);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--color-accent-end) 35%, transparent);
 }
 
-/* If you use <img> instead of next/image in ig grid */
-.ig-img-static {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.hero-centered {
-  background-image: url("/images/banner/home-banner.png");
-}
 
 .hero-video {
   position: absolute;
@@ -128,23 +158,28 @@
 .hero::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  inset: 0;
+  background-color: var(--color-overlay-hero);
   z-index: 0;
 }
 
 /* =====================================================
    SECTION HEADERS
    ===================================================== */
-.section-head {
+.section-head,
+.carousel-head {
   display: flex;
   align-items: end;
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1.25rem;
+  min-width: 0;
+}
+
+.section-head.center .page-title,
+.carousel-head .page-title {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .section-head.center {
@@ -158,33 +193,38 @@
    ===================================================== */
 .carousel-root {
   width: 100%;
-  overflow: visible;
-}
-
-.carousel-head {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 0;
 }
 
 .carousel-controls {
   display: flex;
   margin-top: 1rem;
   gap: 0.5rem;
+  justify-content: center;
 }
 
 /* =====================================================
    EMBLA (DOC STYLE) - CLEAN
    ===================================================== */
 .embla {
-  --slide-spacing: 16px;
-  --slide-size: 85%;
+  --slide-spacing: 12px;
+  --slide-size: 78%;
+  overflow: hidden;
+  touch-action: pan-y pinch-zoom;
+}
+
+@media (min-width: 480px) {
+  .embla {
+    --slide-spacing: 14px;
+    --slide-size: 82%;
+  }
 }
 
 @media (min-width: 768px) {
   .embla {
+    --slide-spacing: 16px;
     --slide-size: 32%;
   }
 }
@@ -198,11 +238,14 @@
   max-width: 100%;
   gap: var(--slide-spacing);
   touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1);
 }
 
 .embla__slide {
   flex: 0 0 var(--slide-size);
   min-width: 0;
+  padding-left: var(--slide-spacing);
+  box-sizing: content-box;
 }
 
 /* Controls row */
@@ -229,7 +272,7 @@
   border: 1px solid var(--color-border);
   width: 44px;
   height: 44px;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   display: grid;
   place-items: center;
 }
@@ -249,13 +292,14 @@
 }
 
 
-/* Category cards */
+/* Category cards – aspect ratio so carousel slides scale with width */
 .category-card {
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--color-border);
   background: var(--color-dark-1);
-  height: 520px;
+  aspect-ratio: 9 / 16;
+  width: 100%;
 }
 
 .category-media {
@@ -297,8 +341,8 @@
   color: var(--color-light);
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0) 55%,
-    rgba(0, 0, 0, 0.6) 100%
+    transparent 55%,
+    var(--color-overlay-soft) 100%
   );
 }
 
@@ -310,10 +354,11 @@
 }
 
 .category-title {
-  font-size: 2rem;
+  font-size: clamp(1rem, 4vw, 2rem);
   font-weight: 900;
   letter-spacing: -0.02em;
   margin-top: 6px;
+  line-height: 1.2;
 }
 
 .category-cta {
@@ -346,10 +391,12 @@
 }
 
 .ig-img-static {
+  width: 100%;
+  height: 100%;
   display: block;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  transition: opacity .18s ease, transform .25s ease;
+  transition: opacity 0.18s ease, transform 0.25s ease;
 }
 
 /* Si ya tenés una regla que aplica opacidad al hover, esta la complementa */
@@ -379,12 +426,12 @@
 .overlay-icons .icon {
   width: 34px;
   height: 34px;
-  background: rgba(0,0,0,0.5);
-  border-radius: 50%;
+  background: var(--color-overlay);
+  border-radius: var(--radius-full);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--color-light);
 }
 
 .overlay-icons .icon svg {
@@ -419,11 +466,11 @@
 .step-badge {
   width: 40px;
   height: 40px;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   display: grid;
   place-items: center;
   font-weight: 800;
-  background: #ffbb00;
+  background: var(--color-accent-end);
   color: var(--color-light);
 }
 
@@ -460,35 +507,33 @@
   }
 }
 
-/* Testimonials: stars yellow, name & location aligned to the right */
+/* Testimonials: single block for .testimonial-card */
 .testimonial-card {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  background: var(--color-dark-1);
 }
 
 .testimonial-card .stars {
-  color: #FFD600;
+  color: var(--color-star);
   font-size: 1rem;
   line-height: 1;
 }
 
-/* Ensure name and location stay at the end/right */
 .testimonial-name,
 .testimonial-location {
   align-self: flex-end;
   text-align: right;
 }
-.testimonial-more{
-   align-self: flex-end;
+
+.testimonial-more {
+  align-self: flex-end;
   text-align: right;
   margin-top: 1rem;
-}
-.testimonial-card {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 18px;
-  background: var(--color-dark-1);
 }
 
 .stars {

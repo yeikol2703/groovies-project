@@ -14,6 +14,9 @@ export type CategoryItem = {
   image2: string;
 };
 
+/**
+ * Embla carousel of category cards (image + title + CTA). Used on home for "shop by category".
+ */
 export default function CategoryCarousel({ items }: { items: CategoryItem[] }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "center",
@@ -37,8 +40,8 @@ export default function CategoryCarousel({ items }: { items: CategoryItem[] }) {
             <Link key={c.title} href={c.href} className="embla__slide">
               <div className="category-card">
                 <div className="category-media">
-                  <Image src={c.image} alt={c.title} fill className="category-img active" />
-                  <Image src={c.image2} alt={c.title} fill className="category-img" />
+                  <Image src={c.image} alt={c.title} fill className="category-img active" sizes="(max-width: 480px) 78vw, (max-width: 768px) 82vw, 32vw" />
+                  <Image src={c.image2} alt={c.title} fill className="category-img" sizes="(max-width: 480px) 78vw, (max-width: 768px) 82vw, 32vw" />
 
                   <div className="category-overlay">
                     <div className="category-eyebrow">{c.subtitle}</div>
@@ -50,14 +53,15 @@ export default function CategoryCarousel({ items }: { items: CategoryItem[] }) {
             </Link>
           ))}
         </div>
-            <div className="carousel-controls">
-          <button type="button" className="icon-btn" onClick={scrollPrev} aria-label="Previous">
-            <ChevronLeft size={18} />
-          </button>
-          <button type="button" className="icon-btn" onClick={scrollNext} aria-label="Next">
-            <ChevronRight size={18} />
-          </button>
-        </div>
+      </div>
+
+      <div className="carousel-controls">
+        <button type="button" className="icon-btn" onClick={scrollPrev} aria-label="Anterior">
+          <ChevronLeft size={18} />
+        </button>
+        <button type="button" className="icon-btn" onClick={scrollNext} aria-label="Siguiente">
+          <ChevronRight size={18} />
+        </button>
       </div>
     </div>
   );

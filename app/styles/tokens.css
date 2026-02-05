@@ -1,5 +1,6 @@
 :root {
   --color-bg: #0D0103;
+  --color-bg-header: rgba(13, 1, 3, 0.95);
   --color-text: #F2F2F2;
   --color-muted: #B0B0B0;
   --color-border: #2a2a2a;
@@ -9,9 +10,20 @@
   --color-dark-2: #2a2a2a;
   --color-light: #fff;
   
-  /* Accent colors */
+  /* Accent & UI */
   --color-success: #25D366;
   --color-white: #fff;
+  --color-accent-start: #ff0000;
+  --color-accent-end: #ffc400;
+  --gradient-accent: linear-gradient(to right, var(--color-accent-start), var(--color-accent-end));
+  --color-star: #FFD600;
+  --color-error: #c00;
+  
+  /* Overlays */
+  --color-overlay: rgba(0, 0, 0, 0.45);
+  --color-overlay-soft: rgba(0, 0, 0, 0.6);
+  --color-overlay-strong: rgba(0, 0, 0, 0.8);
+  --color-overlay-hero: rgba(0, 0, 0, 0.3);
   
   /* Social media colors */
   --color-whatsapp: #25D366;
@@ -21,6 +33,32 @@
   --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: 20px;
+  --radius-full: 999px;
+  --radius-input: 12px;
 
   --container: 100%;
+
+  /* Responsive gutters: small on mobile (full width), larger on wide screens (5rem like original) */
+  --gutter: 0.75rem;
+  --section-padding-y: 2rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --gutter: 1.25rem;
+    --section-padding-y: 2.5rem;
+  }
+}
+
+@media (min-width: 900px) {
+  :root {
+    --gutter: 2rem;
+    --section-padding-y: 3.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --gutter: 5rem;
+  }
 }

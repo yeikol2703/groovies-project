@@ -1,35 +1,33 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { waLink } from "@/lib/env";
+import { CATEGORY_LABELS } from "@/lib/constants";
 
-type CatalogItem = {
+export type CatalogItem = {
   search: string;
   id: string;
   url: string;
   publicId?: string;
-  category?: string; // expected: camisas | parches | sueters | otros
+  category?: string;
   price?: number;
   description?: string;
   group?: string;
 };
 
-const categoryLabels: Record<string, string> = {
-  patch: "PARCHES",
-  shirt: "CAMISAS",
-  hoodie: "SUETERS",
-  other: "OTROS",
-};
-
 const normalize = (v?: string | null) => (v ?? "").trim().toLowerCase();
 
+/**
+ * Catalog screen: fetches gallery API, filter by category/search, modal detail.
+ * WhatsApp CTA and category labels use env and shared constants.
+ */
 export default function CatalogScreen() {
   const [items, setItems] = useState<CatalogItem[]>([]);
   const [filteredItems, setFilteredItems] = useState<CatalogItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedItem, setSelectedItem] = useState<CatalogItem | null>(null);
@@ -37,12 +35,7 @@ export default function CatalogScreen() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const catParam = normalize(searchParams.get("cat")); // <- value, not object
-
-  const waLink = useMemo(
-    () => process.env.NEXT_PUBLIC_WA_LINK ?? "https://wa.me/50600000000",
-    []
-  );
+  const catParam = normalize(searchParams.get("cat"));
 
   // Sync state with URL (?cat=...)
   useEffect(() => {
@@ -101,7 +94,7 @@ export default function CatalogScreen() {
       result = result.filter((item) => {
         const desc = normalize(item.description);
         const cat = normalize(item.category);
-        const label = categoryLabels[cat]?.toLowerCase() ?? "";
+        const label = CATEGORY_LABELS[cat]?.toLowerCase() ?? "";
 
         return desc.includes(s) || cat.includes(s) || label.includes(s);
       });
@@ -166,7 +159,7 @@ export default function CatalogScreen() {
                 }`}
                 onClick={() => setCategoryAndUrl(cat)}
               >
-                {categoryLabels[cat] || cat.toUpperCase()}
+                {CATEGORY_LABELS[cat] || cat.toUpperCase()}
               </button>
             ))}
           </div>
@@ -205,7 +198,7 @@ export default function CatalogScreen() {
                   <div className="catalog-meta hover-underline">
                     {cat && (
                       <span className="catalog-category">
-                        {categoryLabels[cat] || cat.toUpperCase()}
+                        {CATEGORY_LABELS[cat] || cat.toUpperCase()}
                       </span>
                     )}
                     {typeof item.price === "number" && item.price > 0 && (
@@ -249,7 +242,7 @@ export default function CatalogScreen() {
                   <div className="modal-info">
                     <span className="modal-label">Categoría:</span>
                     <span className="modal-value">
-                      {categoryLabels[normalize(selectedItem.category)] ||
+                      {CATEGORY_LABELS[normalize(selectedItem.category)] ||
                         selectedItem.category}
                     </span>
                   </div>
