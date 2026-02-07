@@ -1,5 +1,5 @@
-````md
-# Groovies Store (Catalog)
+
+## Groovies Store (Catalog)
 
 Next.js product catalog for GrooviesStore. Products are loaded from Cloudinary (including metadata) and customers are redirected to WhatsApp. No online payments.
 
@@ -144,6 +144,4 @@ public/
 * Cloudinary secrets must remain server-side (no `NEXT_PUBLIC_` for secrets)
 * WhatsApp is the primary sales channel
 
-```
-::contentReference[oaicite:0]{index=0}
-```
+
