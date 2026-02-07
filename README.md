@@ -1,14 +1,23 @@
+````md
 # Groovies Store (Catalog)
 
-Next.js catalog website for GrooviesStore. Products are displayed from Cloudinary and customers are redirected to WhatsApp. No online payments.
+Next.js product catalog for GrooviesStore. Products are loaded from Cloudinary (including metadata) and customers are redirected to WhatsApp. No online payments.
 
 ## Live
-- https://groovies-two.vercel.app/
+https://groovies-two.vercel.app/
 
-## Stack
+## Screenshots
+
+### Catalog
+<img width="1884" height="895" alt="Catalog view" src="https://github.com/user-attachments/assets/140137f3-ea8a-44cd-80f3-2c8f40f52eb1" />
+
+### Home (Mobile)
+<img width="358" height="616" alt="Home mobile view" src="https://github.com/user-attachments/assets/3a5fc532-0a9f-4fc5-b2f8-8aaccccc07b2" />
+
+## Tech Stack
 - Next.js (App Router)
 - TypeScript
-- CSS (global files in `app/styles`)
+- CSS (global styles under `app/styles`)
 - Cloudinary (media + metadata)
 - Vercel (hosting)
 
@@ -18,43 +27,64 @@ Next.js catalog website for GrooviesStore. Products are displayed from Cloudinar
 ## Setup
 ```bash
 npm install
-Environment Variables
-Create .env.local in the project root:
+````
 
-# Cloudinary (server)
+## Environment Variables
+
+Create `.env.local` in the project root:
+
+```env
+# Cloudinary (server-side only)
 CLOUDINARY_CLOUD_NAME=xxxx
 CLOUDINARY_API_KEY=xxxx
 CLOUDINARY_API_SECRET=xxxx
 
 # Public
 NEXT_PUBLIC_WA_LINK=https://wa.me/506XXXXXXXX
-Run (Local)
-npm run dev
-Open: http://localhost:3000
+```
 
-Build
+## Run (Local)
+
+```bash
+npm run dev
+```
+
+Open: [http://localhost:3000](http://localhost:3000)
+
+## Build
+
+```bash
 npm run build
 npm start
-Cloudinary
-Folder Structure
+```
+
+## Cloudinary
+
+### Folder Structure
+
+```
 groovies/
   camisas/
   parches/
   sueters/
   otros/
-Metadata Fields
-category (string): camisas | parches | sueters | otros
+```
 
-price (number)
+### Metadata Fields
 
-description (string, optional)
+* `category` (string): camisas | parches | sueters | otros
+* `price` (number)
+* `description` (string, optional)
 
-API
-GET /api/gallery
+## API
+
+### GET `/api/gallery`
+
 Returns images from Cloudinary plus metadata.
 
 Response shape:
 
+```json
 [
   {
     "id": "asset_id",
@@ -65,24 +95,55 @@ Response shape:
     "description": "optional"
   }
 ]
-Catalog Filtering
-URL filter: /catalog?cat=parches
+```
 
-Client-side filter uses item.category from API response.
+## Catalog Filtering
 
-Project Structure
+* URL filter: `/catalog?cat=parches`
+* Client-side filtering uses `item.category` and search input
+
+## Project Structure
+
+```
 app/
   api/gallery/route.ts
+  catalog/page.tsx
+  galery/page.tsx
+  custom/page.tsx
+  testimonials/page.tsx
+  faq/page.tsx
+  contact/page.tsx
   styles/
-  (site)/...
+    globals.css
+    tokens.css
+    layout.css
+    sections.css
+    components.css
 components/
-lib/cloudinary.ts
+  layout/
+    Header.tsx
+    Footer.tsx
+  ui/
+    CategoryCarousel.tsx
+lib/
+  cloudinary.ts
 public/
-Deploy (Vercel)
-Push repo to GitHub
+  images/
+```
 
-Import project in Vercel
+## Deploy (Vercel)
 
-Add env vars (Production)
+1. Push repo to GitHub
+2. Import project in Vercel
+3. Add env vars (Production)
+4. Deploy
 
-Deploy
+## Notes
+
+* Do not commit `.env.local`
+* Cloudinary secrets must remain server-side (no `NEXT_PUBLIC_` for secrets)
+* WhatsApp is the primary sales channel
+
+```
+::contentReference[oaicite:0]{index=0}
+```
