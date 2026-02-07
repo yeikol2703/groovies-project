@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Groovies Store (Catalog)
 
-## Getting Started
+Next.js catalog website for GrooviesStore. Products are displayed from Cloudinary and customers are redirected to WhatsApp. No online payments.
 
-First, run the development server:
+## Live
+- https://groovies-two.vercel.app/
 
+## Stack
+- Next.js (App Router)
+- TypeScript
+- CSS (global files in `app/styles`)
+- Cloudinary (media + metadata)
+- Vercel (hosting)
+
+## Requirements
+- Node.js 18+
+
+## Setup
 ```bash
+npm install
+Environment Variables
+Create .env.local in the project root:
+
+# Cloudinary (server)
+CLOUDINARY_CLOUD_NAME=xxxx
+CLOUDINARY_API_KEY=xxxx
+CLOUDINARY_API_SECRET=xxxx
+
+# Public
+NEXT_PUBLIC_WA_LINK=https://wa.me/506XXXXXXXX
+Run (Local)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open: http://localhost:3000
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build
+npm run build
+npm start
+Cloudinary
+Folder Structure
+groovies/
+  camisas/
+  parches/
+  sueters/
+  otros/
+Metadata Fields
+category (string): camisas | parches | sueters | otros
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+price (number)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+description (string, optional)
 
-## Learn More
+API
+GET /api/gallery
+Returns images from Cloudinary plus metadata.
 
-To learn more about Next.js, take a look at the following resources:
+Response shape:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[
+  {
+    "id": "asset_id",
+    "url": "secure_url",
+    "publicId": "public_id",
+    "category": "camisas",
+    "price": 12000,
+    "description": "optional"
+  }
+]
+Catalog Filtering
+URL filter: /catalog?cat=parches
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Client-side filter uses item.category from API response.
 
-## Deploy on Vercel
+Project Structure
+app/
+  api/gallery/route.ts
+  styles/
+  (site)/...
+components/
+lib/cloudinary.ts
+public/
+Deploy (Vercel)
+Push repo to GitHub
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Import project in Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Add env vars (Production)
+
+Deploy
