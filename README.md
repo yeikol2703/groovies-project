@@ -9,10 +9,10 @@ https://groovies-two.vercel.app/
 ## Screenshots
 
 ### Catalog
-<img width="1884" height="895" alt="Catalog view" src="https://github.com/user-attachments/assets/140137f3-ea8a-44cd-80f3-2c8f40f52eb1" />
+<img width="1887" height="882" alt="image" src="https://github.com/user-attachments/assets/a6168236-8bff-4ff7-97ea-6ad231882fc4" />
 
 ### Home (Mobile)
-<img width="358" height="616" alt="Home mobile view" src="https://github.com/user-attachments/assets/3a5fc532-0a9f-4fc5-b2f8-8aaccccc07b2" />
+<img width="445" height="727" alt="image" src="https://github.com/user-attachments/assets/27d2aa8e-9627-4c49-a761-3edba9f17194" />
 
 ## Tech Stack
 - Next.js (App Router)
